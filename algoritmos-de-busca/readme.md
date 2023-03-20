@@ -1,4 +1,4 @@
-# Algoritmos de busca
+# Algoritmos de Busca e Ordenação
 O projeto a seguir possui dois exercícios, cujo enunciados eram:
 
 1. Implemente dois sistemas de busca, um sequencial e outro binário, para realizar buscas de números em um vetor de números crescentes de tamanho 100000 (cem mil). O usuário escolhe o sistema de busca, entra com o número a ser buscado e tem como resposta a posição que o número está (trate se o número não estiver no vetor) e o tempo que levou para encontrar.
