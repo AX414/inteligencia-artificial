@@ -1,2 +1,2 @@
-#Algoritmo de Largura e Profundidade
+# Algoritmo de Largura e Profundidade
 Código de busca de profundidade ainda em desenvolvimento. 
