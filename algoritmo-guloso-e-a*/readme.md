@@ -1,2 +1,0 @@
-# Algoritmo Guloso e A*
-O projeto a seguir conta com o problema do grafo do mapa da Romênia, neste projeto implementei o algoritmo de busca guloso e o algoritmo A* (A-Estrelha). Ambos são métodos que devem ser capazes de responder qual será a menor rota até a cidade de Bucharest, porém há um erro que ocorre na cidade de Lugoj quando utilizamos o algoritmo A*, onde apesar de ser algo que facilmente poderia ser contornado, a pedido do professor, deixamos o algoritmo da forma em que se encontra. 
