@@ -88,14 +88,19 @@ public class Fila {
         }
     }
 
-    public void removerElemento() {
+    public Elemento removerElemento() {
+        Elemento aux;
         if (!filaVazia()) {
+            aux = f[qtdElementos];
             this.inicio++;
             qtdElementos--;
+            return aux;
         }
+        return null;
     }
 
     public void apresentarFila() {
+        System.out.println("\n");
         if (filaVazia()) {
             System.out.println("\nA fila está vazia.");
         } else {
@@ -115,5 +120,17 @@ public class Fila {
 
         return -1;
     }
+    
+    public Elemento pegarElemento(String rotulo) {
+        for (int i = this.inicio; i <= this.fim; i++) {
+            if (f[i].getRotulo().equals(rotulo)) {
+                //Retorna o elemento do rotulo procurado
+                return f[i];
+            }
+        }
 
+        return null;
+    }
+
+    
 }
