@@ -12,7 +12,9 @@ import java.util.Scanner;
  */
 public class PrincipalLargura {
 
-    public static void inserirElemento(Fila fila) {
+    public static Fila fila = new Fila();
+    
+    public static void inserirElemento() {
         Scanner ler = new Scanner(System.in);
         Elemento e = new Elemento();
         String rotulo;
@@ -34,7 +36,7 @@ public class PrincipalLargura {
         System.out.println("\nElemento adicionado na fila.");
     }
 
-    public static void inserirVizinho(Fila fila) {
+    public static void inserirVizinho() {
         Scanner ler = new Scanner(System.in);
         Elemento aux = new Elemento();
         String rotuloPai, rotuloFilho;
@@ -75,7 +77,7 @@ public class PrincipalLargura {
         }
     }
 
-    public static void apresentarVizinhos(Fila fila) {
+    public static void apresentarVizinhos() {
         Scanner ler = new Scanner(System.in);
         String rotulo;
         int posicaoPai;
@@ -93,7 +95,7 @@ public class PrincipalLargura {
         }
     }
 
-    public static void buscaLargura(Fila fila) {
+    public static void buscaLargura() {
         //Fila para guardar os elementos que foram visitados.
         Fila filaVisitados = new Fila();
         Fila filaNaoVisitados = new Fila();
@@ -120,7 +122,7 @@ public class PrincipalLargura {
             System.out.println("\nOrdem dos Elementos Visitados:");
             filaVisitados.apresentarFila();
 
-            for (int i = 0; i < filaNaoVisitados.getFim(); i++) {
+            for (int i = 0; i <= filaNaoVisitados.getFim(); i++) {
                 System.out.println("\nVerificando os vizinhos de : " + filaNaoVisitados.getF()[i].getRotulo());
                 //Para cada elemento da fila, ele verificará os vizinhos
                 //Se tiver um vizinho, marca como visitado, adiciona aos visitados e move para o próximo da fila
@@ -133,7 +135,11 @@ public class PrincipalLargura {
                         filaVisitados.adicionarElemento(e);
                     }
                 }
-                System.out.println("\nRemove " + filaNaoVisitados.getF()[i].getRotulo() + ".");
+                
+                if(filaNaoVisitados.getF()[i].getVizinhos().isEmpty()){
+                    System.out.println("\nElemento sem vizinhos.");
+                }
+                System.out.println("\nRemove " + filaNaoVisitados.getF()[i].getRotulo() + ".\n");
                 //Removendo da fila de não visitados
                 filaNaoVisitados.removerElemento();
             }
@@ -151,7 +157,6 @@ public class PrincipalLargura {
 
     public static void main(String[] args) {
         Scanner ler = new Scanner(System.in);
-        Fila fila = new Fila();
         int op = 0;
 
         do {
@@ -167,19 +172,19 @@ public class PrincipalLargura {
 
             switch (op) {
                 case 1:
-                    inserirElemento(fila);
+                    inserirElemento();
                     break;
                 case 2:
-                    inserirVizinho(fila);
+                    inserirVizinho();
                     break;
                 case 3:
                     fila.apresentarFila();
                     break;
                 case 4:
-                    apresentarVizinhos(fila);
+                    apresentarVizinhos();
                     break;
                 case 5:
-                    buscaLargura(fila);
+                    buscaLargura();
                     break;
                 default:
                     System.out.println("Comando Inválido.");
