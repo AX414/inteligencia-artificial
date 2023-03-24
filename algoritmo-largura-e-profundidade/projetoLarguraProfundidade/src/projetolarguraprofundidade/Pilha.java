@@ -48,7 +48,7 @@ public class Pilha {
         return this.posicaoPilha + 1;
     }
 
-    public Elemento exibeUltimoElemento() {
+    public Elemento getTopo() {
         //top
         if (this.pilhaVazia()) {
             System.out.println("\nA Pilha está vazia.");
