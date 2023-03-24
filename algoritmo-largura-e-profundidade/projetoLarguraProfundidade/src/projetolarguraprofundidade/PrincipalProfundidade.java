@@ -12,7 +12,9 @@ import java.util.Scanner;
  */
 public class PrincipalProfundidade {
 
-    public static void inserirElemento(Pilha pilha) {
+    public static Pilha pilha = new Pilha();
+
+    public static void inserirElemento() {
         Scanner ler = new Scanner(System.in);
         Elemento e = new Elemento();
         String rotulo;
@@ -36,7 +38,7 @@ public class PrincipalProfundidade {
         System.out.println("\nElemento adicionado na pilha.");
     }
 
-    public static void inserirVizinho(Pilha pilha) {
+    public static void inserirVizinho() {
         Scanner ler = new Scanner(System.in);
         Elemento aux = new Elemento();
         String rotuloPai, rotuloFilho;
@@ -69,7 +71,7 @@ public class PrincipalProfundidade {
         }
     }
 
-    public static void apresentarVizinhos(Pilha pilha) {
+    public static void apresentarVizinhos() {
         Scanner ler = new Scanner(System.in);
         String rotulo;
         int posicaoPai;
@@ -88,18 +90,49 @@ public class PrincipalProfundidade {
     }
 
     //https://pt.wikipedia.org/wiki/Busca_em_profundidade
-    public static void buscaProfundidade(Pilha pilha, int posicao) {
+    public static Elemento buscaProfundidade(Elemento e, String rotulo) {
         Pilha pilhaVisitados = new Pilha();
-        Elemento verticeAtual = new Elemento();
+        Pilha pilhaAux = new Pilha();
 
-        //Pega a raiz, que é o primeiro elemento que foi empilhado na pilha
-        verticeAtual = pilha.getPilha()[posicao];
+        e.setVisitado(true);
+        pilhaAux.empilhar(e);
+        pilhaVisitados.empilhar(e);
 
-        //Alterando o valor para visitado
-        verticeAtual.setVisitado(true);
+        System.out.println("\nPilha auxiliar:");
+        pilhaAux.apresentarPilha();
 
-        System.out.println("\nO vértice atual é: "+verticeAtual.getRotulo());
+        System.out.println("\nPilha visitados:");
+        pilhaVisitados.apresentarPilha();
+
+        System.out.println("\nO vértice atual é: " + e.getRotulo());
         //Passa por todos os vértices
+        while (!pilhaAux.pilhaVazia()) {
+            Elemento verticeAtual = pilhaAux.getTopo();
+            pilhaAux.desempilhar();
+
+            if (verticeAtual.getRotulo().equals(rotulo)) {
+                System.out.println("\nVertice atual é igual.");
+                return verticeAtual;
+            }
+
+            for (Elemento aux : verticeAtual.getVizinhos()) {
+                if (!aux.isVisitado()) {
+                    System.out.println("\nVertice adjacente " + aux.getRotulo() + " foi visitado.");
+                    aux.setVisitado(true);
+                    pilhaVisitados.empilhar(aux);
+                    pilhaAux.empilhar(aux);
+                }
+            }
+
+            System.out.println("\nPilha auxiliar:");
+            pilhaAux.apresentarPilha();
+
+            System.out.println("\nPilha visitados:");
+            pilhaVisitados.apresentarPilha();
+
+        }
+
+        /*
         for (int i = 0; i < pilha.getPosicaoPilha(); i++) {
             //Se o vértice não foi visitado
             if (!pilha.getPilha()[i].isVisitado()) {
@@ -121,11 +154,13 @@ public class PrincipalProfundidade {
                 }
             }
         }
+         */
+        return null;
     }
 
     public static void main(String[] args) {
         Scanner ler = new Scanner(System.in);
-        Pilha pilha = new Pilha();
+        Elemento aux = new Elemento();
         int op = 0;
 
         do {
@@ -143,10 +178,10 @@ public class PrincipalProfundidade {
 
             switch (op) {
                 case 1:
-                    inserirElemento(pilha);
+                    inserirElemento();
                     break;
                 case 2:
-                    inserirVizinho(pilha);
+                    inserirVizinho();
                     break;
                 case 3:
                     pilha.desempilhar();
@@ -155,7 +190,7 @@ public class PrincipalProfundidade {
                     }
                     break;
                 case 4:
-                    pilha.exibeUltimoElemento();
+                    pilha.getTopo();
                     break;
                 case 5:
                     if (!pilha.pilhaVazia()) {
@@ -165,10 +200,15 @@ public class PrincipalProfundidade {
                     }
                     break;
                 case 6:
-                    apresentarVizinhos(pilha);
+                    apresentarVizinhos();
                     break;
                 case 7:
-                    buscaProfundidade(pilha, 0);
+                    aux = buscaProfundidade(pilha.getPilha()[0], "4");
+                    if(aux!=null){
+                        System.out.println("\nEncontrado elemento "+aux.getRotulo()+"."); 
+                    }else{
+                        System.out.println("\nNão encontrado.");
+                    }
                     break;
                 default:
                     System.out.println("Comando Inválido.");
